@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Лента записей
+{% endblock title %}
+
+{% block content %}
+  <h1>Лента записей</h1>                        
+  <!-- Перебираем в цикле все посты -->
+  {% for post in posts reversed %}
+    <hr>
+    {% include "includes/block_info.html" %}
+  {% empty %}
+  <h3>Постов пока нет</h3> 
+  {% endfor %}
+{% endblock content %}
