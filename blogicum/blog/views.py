@@ -1,9 +1,15 @@
 from django.shortcuts import render
-
+from .models import Location, Category, Post
+from datetime import datetime
 
 def index(request):
     template = 'blog/index.html'
-    context = {'posts': posts}
+    post_list = Post.objects.select_related('location', 'category').filter(
+        is_published=True, 
+        pub_date__lt=datetime.now(),
+        category__is_published=True, 
+    )[:5]
+    context = {'post_list': post_list}
     return render(request, template, context)
 
 
@@ -17,5 +23,6 @@ def post_detail(request, pk):
 
 def category_posts(request, category_slug):
     template = 'blog/category.html'
-    context = {'category': category_slug}
+    category = Category.objects.filter()
+    context = {'category': category}
     return render(request, template, context)
