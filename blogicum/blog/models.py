@@ -1,9 +1,8 @@
-from django.db import models
+from core.models import CreateAtModel, PublishedModel
 from django.contrib.auth import get_user_model
+from django.db import models
 
-from core.models import PublishedModel, CreateAtModel
 from .constants import MAX_LENGTH_NAME
-
 
 User = get_user_model()
 
@@ -27,7 +26,9 @@ class Category(PublishedModel, CreateAtModel):
     slug = models.SlugField(
         unique=True,
         verbose_name='Идентификатор',
-        help_text='Идентификатор страницы для URL; разрешены символы латиницы, цифры, дефис и подчёркивание.' # noqa
+        help_text=('Идентификатор страницы для URL; '
+                   'разрешены символы латиницы, цифры, дефис '
+                   'и подчёркивание.')
     )
 
     class Meta():
